@@ -54,8 +54,8 @@ import com.android.internal.telephony.uicc.IccCardStatus;
  */
 public class hlteRIL extends RIL implements CommandsInterface {
 
+    private boolean setPreferredNetworkTypeSeen = false;
     private AudioManager mAudioManager;
-
     private Object mSMSLock = new Object();
     private boolean mIsSendingSMS = false;
     protected boolean isGSM = false;
@@ -658,5 +658,36 @@ public class hlteRIL extends RIL implements CommandsInterface {
             AsyncResult.forMessage(response, ret, null);
             response.sendToTarget();
         }
+    }
+
+    @Override
+    public void setPreferredNetworkType(int networkType , Message response) {
+        riljLog("setPreferredNetworkType: " + networkType);
+
+        if (!setPreferredNetworkTypeSeen) {
+            riljLog("Need to reboot modem!");
+            setRadioPower(false, null);
+            setPreferredNetworkTypeSeen = true;
+        }
+
+        super.setPreferredNetworkType(networkType, response);
+    }
+
+    protected Object
+    responseFailCause(Parcel p) {
+        int numInts;
+        int response[];
+
+        numInts = p.readInt();
+        response = new int[numInts];
+        for (int i = 0 ; i < numInts ; i++) {
+            response[i] = p.readInt();
+        }
+        LastCallFailCause failCause = new LastCallFailCause();
+        failCause.causeCode = response[0];
+        if (p.dataAvail() > 0) {
+          failCause.vendorCause = p.readString();
+        }
+        return failCause;
     }
 }
