@@ -1,7 +1,6 @@
 # Art
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
-    dalvik.vm.heapminfree=2m
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
