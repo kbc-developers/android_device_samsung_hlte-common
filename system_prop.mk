@@ -1,6 +1,7 @@
 # Art
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
+    dalvik.vm.heapminfree=2m
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -40,6 +41,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
 
+# Media
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
+
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.nfc.port=I2C
@@ -47,17 +53,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=true \
+    persist.data.qmi.adb_logmask=0 \
     persist.radio.add_power_save=1 \
     persist.radio.lte_vrat_report=1 \
-    persist.radio.mode_pref_nv10=1 
+    persist.radio.mode_pref_nv10=1 \
+    persist.data.qmi.adb_logmask=0
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sensors=1
 
-# Tethering
+# Storage
 PRODUCT_PROPERTY_OVERRIDES += \
-    net.tethering.noprovisioning=true
+    ro.sys.sdcardfs=true
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
