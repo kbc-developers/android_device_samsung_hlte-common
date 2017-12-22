@@ -20,6 +20,8 @@ LOCAL_PATH := device/samsung/hlte-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+# Use Snapdragon LLVM if available on build server
+TARGET_USE_SDCLANG := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -33,10 +35,7 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
 LZMA_RAMDISK_TARGETS := recovery
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
-TARGET_KERNEL_CONFIG := msm8974_sec_defconfig
-TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
-TARGET_KERNEL_VARIANT_CONFIG := kbc_aosp_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/hlte
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
 
 #TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 TARGET_KERNEL_HAVE_EXFAT := true
@@ -66,15 +65,11 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_HARDWARE_CLASS += device/samsung/hlte-common/cmhw
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
-# RIL
-BOARD_RIL_CLASS := ../../../device/samsung/hlte-common/ril
-
 # Graphics
 TARGET_HAVE_NEW_GRALLOC := true
 
-# Display
-SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
-VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
+# Extended Filesystem Support
+TARGET_KERNEL_HAVE_EXFAT := true
 
 # Legacy BLOB Support
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
@@ -89,6 +84,10 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
 # Power HAL
 TARGET_POWERHAL_VARIANT := qcom
 TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
+
+# Radio
+BOARD_PROVIDES_LIBRIL := true
+TARGET_RIL_VARIANT := caf
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -106,6 +105,11 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
+
+# TWRP Support - Optional
+#ifeq ($(WITH_TWRP),true)
+#-include $(LOCAL_PATH)/twrp.mk
+#endif
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI := true
@@ -159,3 +163,5 @@ else
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_RECOVERY_SWIPE := true
 endif
+# Inherit from the proprietary version
+-include vendor/samsung/hlte-common/BoardConfigVendor.mk

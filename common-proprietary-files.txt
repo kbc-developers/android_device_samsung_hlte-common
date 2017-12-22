@@ -26,6 +26,10 @@ vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib/libscve.so
 vendor/lib/libscve_stub.so
+vendor/lib/rfsa/adsp/libdspCV_skel.so
+vendor/lib/rfsa/adsp/libfastcvadsp.so
+vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
+vendor/lib/rfsa/adsp/libscveT2T_skel.so
 
 # aptX (Moto griffin - NCLS25.86-11-4-6-5)
 vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so|b03772672144d4b750a5672c2922aded93bb0512
@@ -250,52 +254,39 @@ vendor/lib/libthermalioctl.so
 
 # DRM
 bin/qseecomd
-lib/drm/libfwdlockengine.so
-lib/libdrmdecrypt.so
-lib/libhdcp2.so
-lib/libstagefright_hdcp.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
 vendor/lib/libQSEEComAPI.so
-vendor/lib/liboemcrypto.so
-vendor/lib/rfsa/adsp/libdspCV_skel.so
-vendor/lib/rfsa/adsp/libfastcvadsp.so
-vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
-vendor/lib/rfsa/adsp/libscveT2T_skel.so
 
-# GPS
-lib/hw/gps.default.so
-lib/libgps.utils.so
-lib/libloc_api_v02.so
-lib/libloc_core.so
-lib/libloc_eng.so
-vendor/lib/hw/flp.default.so
-vendor/lib/libgeofence.so
-vendor/lib/libizat_core.so
-vendor/lib/liblbs_core.so
-vendor/lib/libperipheral_client.so
+# GPS (OnePlus bacon - lineage-14.1-20170807-nightly-bacon-signed.zip)
+lib/libloc_api_v02.so|9a8401afc86b54e73aa29995f228fd0243cee793
+lib/libloc_ds_api.so|ccce9d3c3fa4cadafd13b63c90d3ab8c115dd7b0
+vendor/lib/hw/flp.default.so|c36ec0a3e6563fa8ddb96aaa7d0129249ce1d305
+vendor/lib/libflp.so|20994b3ac3ecd2094698ac98463aed97e3ce54ef
+vendor/lib/libgeofence.so|953c2720c98825cdfb2757839f5f86400c11a2d5
+vendor/lib/libizat_core.so|8d1b8f5c26cc9bcdacb402e253048211a6c07ba1
+vendor/lib/liblbs_core.so|3dea19e84a0d226ea3e5c92ec169f7e0fdbe5699
 
-# Graphics (OnePlus bacon - Cyanogen OS cm-13.1.2-ZNH2KAS3P0)
-vendor/lib/egl/eglsubAndroid.so|cefa669b1d8e0b05afb46d435e7c9f65bfabea02
-vendor/lib/egl/libEGL_adreno.so|c409c4d27935de4597c8d31d5a43fff09c550531
-vendor/lib/egl/libGLESv1_CM_adreno.so|5fd26236efa861bdb6d756472b6659de97fbcfb6
-vendor/lib/egl/libGLESv2_adreno.so|7d01651611e3478803ee3fd471f96a5bbd4cdaae
-vendor/lib/egl/libq3dtools_adreno.so|93e4959a96ab75642aeafade2bfbdfa84bf22b09
-vendor/lib/libC2D2.so|4bcc9bcb6acfde2b015249e3139b1aa78c6dfd12
-vendor/lib/libCB.so|c3315c47c7c1d89e1dfc3b8ebe688edcfecd67f1
-vendor/lib/libOpenCL.so|8f9131c992b83126171a3e64622baf3635ed5424
-vendor/lib/libRSDriver_adreno.so|dbdf3a7e1257a4c383f6990e2d5dfc24822c1ebc
-vendor/lib/libadreno_utils.so|35cfc92e07de8ac1c889fac32dc592a9974259dc
-vendor/lib/libbccQTI.so|e2c5ba0d6d6e0040ddf3a8981a8b9a521f9d1524
-vendor/lib/libc2d30-a3xx.so|45529c0a6d38a51234486810d57a43684f8adff1
-vendor/lib/libgsl.so|69ac0036c7e66431dbb4fb07dc5120f721c2458c
-vendor/lib/libllvm-qcom.so|deebd38f415f0888144cad9e5cbcbfa2439fe753
-vendor/lib/librs_adreno.so|06574dc89b1b9fd9832a109d3fd1afff7febc77f
-vendor/lib/librs_adreno_sha1.so|c53e83adfdc77192ed55503ba185858950c976d8
-vendor/lib/libsc-a3xx.so|9e6329f434fae0f4eec7c246c648dca499f89375
-vendor/lib/libscale.so|5cce434e527f9f392d4a98dd9474483a34a8c7ef
+# Graphics (OnePlus onyx - Oxygen OS 3.1.4 - OnePlusXOxygen_14_201611071506)
+vendor/lib/egl/eglsubAndroid.so|b8a5790c5b4ba4cf0018c94066104610c821ed8e
+vendor/lib/egl/libEGL_adreno.so|cd29673e990dba8158e961e287a79dfbd852d095
+vendor/lib/egl/libGLESv1_CM_adreno.so|ae86d16ba499ac6cdd3cecb91ae6b16b4c303984
+vendor/lib/egl/libGLESv2_adreno.so|445be60045ff86d1d27545692134eacf0d89a6dc
+vendor/lib/egl/libq3dtools_adreno.so|2c12919492f1146b58f4f1c379dfe10d3320d476
+vendor/lib/libC2D2.so|d34587d5143bd09f847cb6686b03461a6e62cd87
+vendor/lib/libCB.so|3d2ad5bbff1cf4019d89c38689ec2ce3c186a3c1
+vendor/lib/libOpenCL.so|2b4b9692b16729b880d7881e68208183943f9612
+vendor/lib/libadreno_utils.so|a109e06c933811c578d129c0772a612cf5d94367
+vendor/lib/libbccQTI.so|94132d5d8421428001c2201a8915949c531b0ad9
+vendor/lib/libc2d30-a3xx.so|3666e0bf418e7ea7480b27c2c1ddd1bc86037044
+vendor/lib/libgsl.so|fafee1adf0e89325b3a1ea83d5205c02ebf860f3
+vendor/lib/libllvm-qcom.so|fc96c949b662fb34b287a4c0aa194984fbb57d7d
+vendor/lib/libsc-a3xx.so|231201bcfead5f930537d2fba22d89b00e673386
+vendor/lib/libscale.so|b44f44c633fa404d10e76aaa23593b516e08e2b8
+
+# Graphics blur (OnePlus bacon - Cyanogen OS cm-13.1.2-ZNH2KAS3P0)
 vendor/lib/libuiblur.so|12dd942092c05d978a2a2db3ea37e0b410427b52
 
 # Graphics firmware
@@ -310,16 +301,11 @@ etc/sec_config
 bin/radish
 
 # Media
-vendor/lib/libDivxDrm.so
-vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
-vendor/lib/libSHIMDivxDrm.so
 
 # NFC
 vendor/firmware/bcm2079xB4_firmware.ncd
@@ -330,13 +316,36 @@ vendor/firmware/bcm2079xB5_pre_firmware.ncd
 # Perf
 vendor/lib/libqti-perfd-client.so
 
-# Postprocessing
-vendor/lib/libdisp-aba.so
--vendor/lib/libmm-abl.so
-vendor/lib/libmm-abl-oem.so
-
 # Qualcomm
 vendor/lib/libxml.so
+
+# Qualcomm framework - pinned blobs from G900FXXS1BPCL_G900FOXA1BOJ1_BTU
+lib/libmdmdetect.so
+vendor/lib/libconfigdb.so
+vendor/lib/libdiag.so
+vendor/lib/libdsi_netctrl.so|d5d25fd5b1ea250bdfcb64059eafaf609fe2e32c
+vendor/lib/libdsutils.so
+vendor/lib/libidl.so
+vendor/lib/libnetmgr.so
+vendor/lib/libperipheral_client.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqdi.so|6bd79ba4dc4b4af654cda666e829312ba07a22e9
+vendor/lib/libqmi.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqmiservices.so
+
+# Radio
+bin/efsks
+bin/ks
+bin/qcks
+bin/qmuxd
+bin/rfs_access
+bin/rmt_storage
+vendor/lib/libril-qcril-hook-oem.so
 
 # Sensors
 lib/hw/sensorhubs.msm8974.so

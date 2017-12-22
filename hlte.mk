@@ -42,11 +42,8 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.consumerir.xml:system/etc/permissions/android.hardware.consumerir.xml \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
 # Audio
@@ -66,7 +63,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SamsungDoze
 
+# FlipFlap
+PRODUCT_PACKAGES += \
+    FlipFlap
+
+# Gestures
+PRODUCT_PACKAGES += \
+    com.cyanogenmod.keyhandler
+
 # GPS
+PRODUCT_PACKAGES += \
+    gps.msm8974
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
@@ -76,6 +84,7 @@ PRODUCT_COPY_FILES += \
 # camera
 PRODUCT_PACKAGES += \
     camera.msm8974 \
+    libshim_camera \
     libstlport \
     libxml2 \
     Snap
@@ -128,7 +137,7 @@ endif
 
 # Radio
 PRODUCT_PACKAGES += \
-    libshim_ril
+    libsecnativefeature
 
 # Ramdisk
 PRODUCT_PACKAGES += \
