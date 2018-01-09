@@ -20,6 +20,9 @@ LOCAL_PATH := device/samsung/hlte-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+# ADB Legacy Interface
+TARGET_USES_LEGACY_ADB_INTERFACE := true
+
 # Use Snapdragon LLVM if available on build server
 TARGET_USE_SDCLANG := true
 
@@ -43,6 +46,9 @@ AUDIO_FEATURE_LOW_LATENCY_PRIMARY := false
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := false
 AUDIO_FEATURE_ENABLED_LOW_LATENCY_CAPTURE := false
 
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+
 # Bluetooth
 BOARD_CUSTOM_BT_CONFIG := $(LOCAL_PATH)/bluetooth/vnd_hlte.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
@@ -54,13 +60,15 @@ BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Camera
-TARGET_PROVIDES_CAMERA_HAL := true
-TARGET_USE_COMPAT_GRALLOC_ALIGN := true
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+#TARGET_PROVIDES_CAMERA_HAL := true
+#TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # CMHW
-BOARD_HARDWARE_CLASS += device/samsung/hlte-common/cmhw
-BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
+BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
+#BOARD_HARDWARE_CLASS += device/samsung/hlte-common/cmhw
+#BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # Graphics
 TARGET_HAVE_NEW_GRALLOC := true
