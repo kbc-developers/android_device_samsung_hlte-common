@@ -67,7 +67,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     FlipFlap
 
+# Gestures
+PRODUCT_PACKAGES += \
+    com.cyanogenmod.keyhandler
+
 # GPS
+PRODUCT_PACKAGES += \
+    gps.msm8974
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/flp.conf:system/etc/flp.conf \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
@@ -77,6 +84,7 @@ PRODUCT_COPY_FILES += \
 # camera
 PRODUCT_PACKAGES += \
     camera.msm8974 \
+    libshim_camera \
     libstlport \
     libxml2 \
     Snap
@@ -129,7 +137,7 @@ endif
 
 # Radio
 PRODUCT_PACKAGES += \
-    libshim_ril
+    libsecnativefeature
 
 # Ramdisk
 PRODUCT_PACKAGES += \
