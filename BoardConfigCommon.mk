@@ -26,20 +26,6 @@ TARGET_USES_LEGACY_ADB_INTERFACE := true
 # Use Snapdragon LLVM if available on build server
 TARGET_USE_SDCLANG := true
 
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8974
-
-# Kernel
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
-BOARD_KERNEL_IMAGE_NAME := zImage-dtb
-BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
-LZMA_RAMDISK_TARGETS := recovery
-BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
-TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
-
 # Audio
 QCOM_CSDCLIENT_ENABLED := false
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := false
@@ -56,6 +42,9 @@ BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MSM8974
+
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
@@ -67,18 +56,33 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 
 # CMHW
 BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
-#BOARD_HARDWARE_CLASS += device/samsung/hlte-common/cmhw
-#BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
-
-# Graphics
-TARGET_HAVE_NEW_GRALLOC := true
 
 # Extended Filesystem Support
 TARGET_KERNEL_HAVE_EXFAT := true
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
+
+# Kernel
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
+ifeq ($(WITH_TWRP),true)
+#TWRP needs enforce!!
+else
+#workaround until fixing selinux policy for klte
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+endif
+BOARD_KERNEL_IMAGE_NAME := zImage
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
+BOARD_CUSTOM_BOOTIMG := true
+BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
+LZMA_RAMDISK_TARGETS := recovery
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
+
 # Legacy BLOB Support
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
-TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -87,26 +91,28 @@ TARGET_USERIMAGES_USE_F2FS := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
 
 # Power HAL
-TARGET_POWERHAL_VARIANT := qcom
 TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
+TARGET_POWERHAL_VARIANT := qcom
+
 
 # Radio
 BOARD_PROVIDES_LIBRIL := true
 TARGET_RIL_VARIANT := caf
 
 # Recovery
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
-BOARD_USES_MMCUTILS := true
 TARGET_RECOVERY_DENSITY := xhdpi
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.qcom
 
 # SELinux
 -include device/qcom/sepolicy/sepolicy.mk
-#BOARD_SEPOLICY_DIRS += device/samsung/hlte-common/sepolicy
+#BOARD_SEPOLICY_DIRS += \
+#   device/samsung/hlte-common/sepolicy
 
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
