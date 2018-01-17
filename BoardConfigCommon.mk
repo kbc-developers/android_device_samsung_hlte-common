@@ -94,6 +94,8 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := f2fs
 TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
 TARGET_POWERHAL_VARIANT := qcom
 
+# Properties
+TARGET_SYSTEM_PROP += device/samsung/hlte-common/system.prop
 
 # Radio
 BOARD_PROVIDES_LIBRIL := true
