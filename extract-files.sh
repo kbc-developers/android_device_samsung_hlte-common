@@ -53,6 +53,15 @@ setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true
 extract "$MY_DIR"/common-proprietary-files.txt "$SRC"
 extract "$MY_DIR"/common-proprietary-files-twrp.txt "$SRC"
 
+COMMON_BLOB_ROOT="$CM_ROOT"/vendor/"$VENDOR"/"$DEVICE_COMMON"/proprietary
+
+MMCAMERA2_SENSOR_MODULES="$COMMON_BLOB_ROOT"/vendor/lib/libmmcamera2_sensor_modules.so
+sed -i 's|system/etc|vendor/etc|g;
+        s|/system/lib|/vendor/lib|g' "$MMCAMERA2_SENSOR_MODULES"
+
+THERMAL_ENGINE="$COMMON_BLOB_ROOT"/vendor/bin/thermal-engine
+sed -i 's|/system/etc|/vendor/etc|g' "$THERMAL_ENGINE"
+
 # Reinitialize the helper for device
 setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
 

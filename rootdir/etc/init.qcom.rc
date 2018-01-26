@@ -30,7 +30,6 @@ import init.qcom.usb.rc
 import init.target.rc
 
 on early-init
-    export LD_SHIM_LIBS /system/vendor/lib/hw/camera.vendor.msm8974.so|libshim_camera.so:/system/lib/libcutils.so|libshim_cutils_atomic.so
     setprop sys.boot_completed 0
 
     mount debugfs debugfs /sys/kernel/debug
@@ -85,6 +84,8 @@ on early-init
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
 on init
+    export LD_SHIM_LIBS /system/vendor/lib/hw/camera.vendor.msm8974.so|libshim_camera.so:/system/lib/libcutils.so|libshim_cutils_atomic.so
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
@@ -396,7 +397,7 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class main
     user root
     oneshot
