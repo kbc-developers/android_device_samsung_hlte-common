@@ -216,6 +216,9 @@ on post-fs-data
     chmod 0660 /efs/wifi/.mac.info
     restorecon /efs/wifi/.mac.info
 
+    # for WIFI Front End Module
+    chown system system /data/.cid.info
+    chmod 0664 /data/.cid.info
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -383,17 +386,8 @@ on post-fs-data
 
     # Remove symlinks to avoid issues with migrate after nandroid restores
     # Will be recreated at end of boot
-    # Normal path
     rm /data/data/com.android.providers.telephony/databases
     rm /data/data/com.android.providers.telephony/shared_prefs
-
-    # COMPAT: Handle upgrade from previous implementation of this idea. If the
-    # above could not be unlinked then we have the old symlinked files
-    # scenario. Clean that up.
-    rm /data/data/com.android.providers.telephony/databases/telephony.db
-    rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
-    rmdir /data/data/com.android.providers.telephony/databases
-    rmdir /data/data/com.android.providers.telephony/shared_prefs
 
     setprop vold.post_fs_data_done 1
 
@@ -426,7 +420,7 @@ on property:ro.debuggable=1
 service qmuxd /vendor/bin/qmuxd
     class main
     user root
-    group radio audio bluetooth gps qcom_diag log
+    group radio audio bluetooth gps oem_2950 log
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -448,15 +442,12 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 service macloader /vendor/bin/macloader
     class late_start
     oneshot
+    user system
+    group system wifi
     seclabel u:r:macloader:s0
 
 on property:wlan.driver.status=ok
     start macloader
-
-on property:init.svc.macloader=stopped
-    chown system root /data/.rev
-    chmod 0664 /data/.rev
-# end of wifi
 
 on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/scheduler row
@@ -468,7 +459,7 @@ on property:sys.boot_completed=1
     rm /data/system/perfd/default_values
     start mpdecision
 
-    # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
+    # Symlink directories to access telephony.db and preferred-apn.xml required by libsec-ril
     symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
     symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
 
