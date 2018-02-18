@@ -23,9 +23,6 @@ TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 # ADB Legacy Interface
 TARGET_USES_LEGACY_ADB_INTERFACE := true
 
-# ANT+
-BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
-
 # Audio
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
@@ -73,6 +70,7 @@ TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
 # Legacy BLOB Support
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+TARGET_LD_SHIM_LIBS := /system/vendor/lib/hw/camera.vendor.msm8974.so|libshim_camera.so:/system/lib/libcutils.so|libshim_cutils_atomic.so
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 11534336

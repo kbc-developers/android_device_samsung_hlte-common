@@ -84,8 +84,6 @@ on early-init
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
 on init
-    export LD_SHIM_LIBS /system/vendor/lib/hw/camera.vendor.msm8974.so|libshim_camera.so:/system/lib/libcutils.so|libshim_cutils_atomic.so
-
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
@@ -183,6 +181,7 @@ on boot
 
     # Set permissions for firmware path control
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
+    chown wifi wifi /sys/module/dhd/parameters/nvram_path
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -348,9 +347,6 @@ on post-fs-data
     mkdir /data/fota 0771
     chown system system /data/fota
 
-    #Create directory for hostapd
-    mkdir /data/hostapd 0770 system wifi
-
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
@@ -465,13 +461,6 @@ on property:sys.boot_completed=1
 
 on property:sys.boot_completed=0
     setprop sys.perf.profile 2
-
-service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
-    class late_start
-    user root
-    group root
-    oneshot
-    disabled
 
 service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
     class late_start
