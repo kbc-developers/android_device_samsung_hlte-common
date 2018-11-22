@@ -37,8 +37,6 @@ ro.qc.sdk.izat.service_mask=0x0
 ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
 
 # Media
-media.stagefright.legacyencoder=true
-media.stagefright.less-secure=true
 persist.media.treble_omx=false
 
 # NFC
@@ -54,6 +52,9 @@ ro.telephony.mms_data_profile=5
 
 # Sensors
 debug.sensors=1
+
+# Vendor security patch level
+ro.lineage.build.vendor_security_patch=2016-06-01
 
 # Wifi
 wifi.interface=wlan0
